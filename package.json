@@ -10,7 +10,7 @@
     "start": "node server/server.js"
   },
   "name": "socket-io",
-  "version": "1",
+  "version": "1.0.0",
   "description": "aplicacion de sockets",
   "main": "server/server.js",
   "author": "jessdev <gjfigueroah@gmail.com>",
