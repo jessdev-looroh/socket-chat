@@ -1,0 +1,18 @@
+{
+  "dependencies": {
+    "express": "^4.17.1",
+    "socket.io": "^3.0.3"
+  },
+  "devDependencies": {
+    "@types/express": "^4.17.9"
+  },
+  "scripts": {
+    "start": "node server/server.js"
+  },
+  "name": "socket-io",
+  "version": "1",
+  "description": "aplicacion de sockets",
+  "main": "server/server.js",
+  "author": "jessdev <gjfigueroah@gmail.com>",
+  "license": "MIT"
+}
