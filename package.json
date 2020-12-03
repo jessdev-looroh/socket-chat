@@ -9,7 +9,7 @@
   "scripts": {
     "start": "node server/server.js"
   },
-  "name": "socket-io",
+  "name": "socket-chat-io",
   "version": "1.0.0",
   "description": "aplicacion de sockets",
   "main": "server/server.js",
