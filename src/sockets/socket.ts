@@ -36,16 +36,20 @@ io.on("connection", (cliente: Socket) => {
     
   });
 
-  cliente.on("crearMensaje", (data) => {
+  cliente.on("crearMensaje", (data,callback) => {
     let persona = usuario.getPersona(cliente.id);
     let mensaje = crearMensaje(persona.nombre, data.mensaje);
     cliente.broadcast.to(persona.sala).emit("crearMensaje",mensaje);
+    callback({
+      exito:true,
+      mensaje
+    })
   });
 
   cliente.on("disconnect", () => {
     let usuarioBorrado = usuario.borrarPersona(cliente.id);
-    cliente.broadcast.to(usuarioBorrado.sala).emit("listaPersonas", {
-      personas: usuario.getPersonasPorSala(usuarioBorrado.sala),
+    cliente.broadcast.to(usuarioBorrado?.sala).emit("listaPersonas", {
+      personas: usuario.getPersonasPorSala(usuarioBorrado?.sala),
       nuevo: crearMensaje(
         "looroh bot <3",
         `${usuarioBorrado?.nombre} abandonó el chat. :(`

@@ -14,16 +14,20 @@ var usuario = {
 socket.on('connect', function() {
     console.log("Conectado al servidor");
     socket.emit('entrarChat', usuario, function(resp) {
+        renderizarUsuarios(resp.usuarios);
         console.log("usuarios conectados", resp);
     });
 });
 
 socket.on('crearMensaje',(resp)=>{
+    renderizarMensajes(resp,false,false);
+    scrollBottom();
     console.log(resp);
 })
 
 socket.on('listaPersonas', (data) => {
-    console.log(data);
+    renderizarUsuarios(data.personas);
+    renderizarMensajes(data.nuevo,false,true);
 })
 
 socket.on('disconnect', function() {

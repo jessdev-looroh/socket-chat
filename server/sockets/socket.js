@@ -30,15 +30,19 @@ io.on("connection", (cliente) => {
         let persona = usuarios_1.default.getPersona(cliente.id);
         cliente.broadcast.to(data.id).emit('mensajePrivado', utils_1.default(persona.nombre, data.mensaje));
     });
-    cliente.on("crearMensaje", (data) => {
+    cliente.on("crearMensaje", (data, callback) => {
         let persona = usuarios_1.default.getPersona(cliente.id);
         let mensaje = utils_1.default(persona.nombre, data.mensaje);
         cliente.broadcast.to(persona.sala).emit("crearMensaje", mensaje);
+        callback({
+            exito: true,
+            mensaje
+        });
     });
     cliente.on("disconnect", () => {
         let usuarioBorrado = usuarios_1.default.borrarPersona(cliente.id);
-        cliente.broadcast.to(usuarioBorrado.sala).emit("listaPersonas", {
-            personas: usuarios_1.default.getPersonasPorSala(usuarioBorrado.sala),
+        cliente.broadcast.to(usuarioBorrado === null || usuarioBorrado === void 0 ? void 0 : usuarioBorrado.sala).emit("listaPersonas", {
+            personas: usuarios_1.default.getPersonasPorSala(usuarioBorrado === null || usuarioBorrado === void 0 ? void 0 : usuarioBorrado.sala),
             nuevo: utils_1.default("looroh bot <3", `${usuarioBorrado === null || usuarioBorrado === void 0 ? void 0 : usuarioBorrado.nombre} abandonó el chat. :(`),
         });
     });
